@@ -50,5 +50,15 @@ public class PersonController {
         personService.removePerson(personId);
     }
 
+    @GetMapping("/persons/{personId}")
+    public PersonDTO getPerson(@PathVariable Long personId) {
+        return personService.getPersonById(personId);
+    }
+
+    @PutMapping("/persons/{personId}")
+    public PersonDTO editPerson(@RequestBody PersonDTO personDTO,@PathVariable Long personId){
+        return personService.editPersonById(personId,personDTO);
+    }
+
 }
 

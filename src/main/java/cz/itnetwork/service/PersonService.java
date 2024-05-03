@@ -29,4 +29,13 @@ public interface PersonService {
      */
     List<PersonDTO> getAll();
 
+    /**
+     * varti DTO person
+     * @param personId hledane Id
+     * @return person DTO
+     */
+
+    PersonDTO getPersonById(long personId);
+
+    PersonDTO editPersonById(long personId, PersonDTO newPersonDTO);
 }
