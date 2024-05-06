@@ -40,6 +40,13 @@ public class InvoiceServiceImpl implements InvoiceService {
         return completeInvoice(invoiceRepository.save(invoiceMapper.toEntity(invoiceDTO)));
     }
 
+    @Override
+    public void removePerson(long invoiceId) {
+        invoiceRepository.delete(fetchInvoiceById(invoiceId));
+    }
+
+//    /////////////private methods//////////////////////////////////////////////////////////////////////////
+
     private InvoiceEntity fetchInvoiceById(long id) {
         return invoiceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Invoice with id " + id + " wasn't found in the database."));
