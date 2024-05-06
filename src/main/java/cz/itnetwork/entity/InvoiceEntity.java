@@ -18,11 +18,9 @@ public class InvoiceEntity {
     @Column(nullable = false)
     private long invoiceNumber;
 
-    @Column(nullable = false)
     @ManyToOne
     private PersonEntity seller;
 
-    @Column(nullable = false)
     @ManyToOne
     private PersonEntity buyer;
 
