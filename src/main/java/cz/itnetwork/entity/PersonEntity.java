@@ -36,7 +36,7 @@ public class PersonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -77,9 +77,9 @@ public class PersonEntity {
 
     private boolean hidden = false;
 
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
     private List<InvoiceEntity> purchases;
 
-    @OneToMany(mappedBy = "buyer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
     private List<InvoiceEntity> sales;
 }

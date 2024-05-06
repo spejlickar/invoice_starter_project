@@ -21,6 +21,7 @@
  */
 package cz.itnetwork.controller;
 
+import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,11 @@ public class PersonController {
     @PutMapping("/persons/{personId}")
     public PersonDTO editPerson(@RequestBody PersonDTO personDTO,@PathVariable Long personId){
         return personService.editPersonById(personId,personDTO);
+    }
+
+    @GetMapping("/identification/{identificationNumber}/purchases")
+    public List<InvoiceDTO> getInvoices(String identificationNumber) {
+        return personService.getPurchasesByIdentificationNumber(identificationNumber);
     }
 
 }

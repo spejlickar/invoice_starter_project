@@ -30,4 +30,6 @@ public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
     List<PersonEntity> findByHidden(boolean hidden);
 
+    List<PersonEntity> findByIdentificationNumber(String identificationNumber);
+
 }

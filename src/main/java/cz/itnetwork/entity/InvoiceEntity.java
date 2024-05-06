@@ -13,10 +13,10 @@ import java.util.Date;
 public class InvoiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
-    private long invoiceNumber;
+    private Long invoiceNumber;
 
     @ManyToOne
     private PersonEntity seller;
@@ -41,4 +41,18 @@ public class InvoiceEntity {
 
     @Column(nullable = false)
     private String note;
+
+    public Long getSellerId(){
+        if (this.seller == null) {
+            return null;
+        }
+        return this.seller.getId();
+    }
+
+    public Long getBuyerId(){
+        if (this.seller == null) {
+            return null;
+        }
+        return this.buyer.getId();
+    }
 }

@@ -21,7 +21,9 @@
  */
 package cz.itnetwork.service;
 
+import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
+import cz.itnetwork.dto.mapper.InvoiceMapper;
 import cz.itnetwork.dto.mapper.PersonMapper;
 import cz.itnetwork.entity.PersonEntity;
 import cz.itnetwork.entity.repository.PersonRepository;
@@ -37,6 +39,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonMapper personMapper;
+
+    @Autowired
+    private InvoiceMapper invoiceMapper;
 
     @Autowired
     private PersonRepository personRepository;
@@ -85,6 +90,15 @@ public class PersonServiceImpl implements PersonService {
         savedPersonEntity.setHidden(true);
         personRepository.save(savedPersonEntity);
         return personMapper.toDTO(personRepository.save(personMapper.toEntity(newPersonDTO)));
+    }
+
+    @Override
+    public List<InvoiceDTO> getPurchasesByIdentificationNumber(String identificationNumber) {
+        return personRepository.findByIdentificationNumber(identificationNumber)
+                .stream()
+                .flatMap(i ->i.getPurchases().stream())
+                .map(i->invoiceMapper.toDTO(i))
+                .toList();
     }
 
     // region: Private methods
