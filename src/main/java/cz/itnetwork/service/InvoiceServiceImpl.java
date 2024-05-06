@@ -3,6 +3,7 @@ package cz.itnetwork.service;
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.dto.mapper.InvoiceMapper;
+import cz.itnetwork.dto.mapper.PersonMapper;
 import cz.itnetwork.entity.InvoiceEntity;
 import cz.itnetwork.entity.PersonEntity;
 import cz.itnetwork.entity.repository.InvoiceRepository;
@@ -21,29 +22,33 @@ public class InvoiceServiceImpl implements InvoiceService {
     private InvoiceRepository invoiceRepository;
 
     @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
     private PersonService personService;
 
     @Override
     public InvoiceDTO addInvoice(InvoiceDTO invoiceDTO) {
-        InvoiceEntity newInvoiceEntity = invoiceRepository.save(invoiceMapper.toEntity(invoiceDTO));
-        newInvoiceEntity.setSeller(personRepository.getReferenceById( invoiceDTO.getSeller().getId()));
-        newInvoiceEntity.setBuyer(personRepository.getReferenceById( invoiceDTO.getBuyer().getId()));
-        return invoiceMapper.toDTO(newInvoiceEntity);
+        return completeInvoice(invoiceRepository.save(invoiceMapper.toEntity(invoiceDTO)));
     }
 
     @Override
     public InvoiceDTO getInvoiceById(long invoiceId) {
-        InvoiceDTO foundInvoiceDTO = invoiceMapper.toDTO(fetchInvoiceById(invoiceId));
-        foundInvoiceDTO.setSeller(personService.getPersonById(foundInvoiceDTO.getSeller().getId()));
-        foundInvoiceDTO.setBuyer(personService.getPersonById(foundInvoiceDTO.getBuyer().getId()));
-        return foundInvoiceDTO;
+        return completeInvoice(fetchInvoiceById(invoiceId));
+    }
+
+    @Override
+    public InvoiceDTO editInvoiceById(long invoiceId, InvoiceDTO invoiceDTO) {
+        invoiceDTO.setId(invoiceId);
+        return completeInvoice(invoiceRepository.save(invoiceMapper.toEntity(invoiceDTO)));
     }
 
     private InvoiceEntity fetchInvoiceById(long id) {
         return invoiceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Invoice with id " + id + " wasn't found in the database."));
+    }
+
+    private InvoiceDTO completeInvoice(InvoiceEntity invoiceEntity){
+        InvoiceDTO invoiceDTO = invoiceMapper.toDTO(invoiceEntity);
+        invoiceDTO.setSeller(personService.getPersonById(invoiceDTO.getSeller().getId()));
+        invoiceDTO.setBuyer(personService.getPersonById(invoiceDTO.getBuyer().getId()));
+        return invoiceDTO;
     }
 }

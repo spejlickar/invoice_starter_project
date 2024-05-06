@@ -22,4 +22,10 @@ public class InvoiceController {
     public InvoiceDTO getInvoice(@PathVariable Long invoiceId) {
         return invoiceService.getInvoiceById(invoiceId);
     }
+
+    @PutMapping("/invoices/{invoiceId}")
+    public InvoiceDTO editInvoice(@RequestBody InvoiceDTO invoiceDTO,@PathVariable Long invoiceId){
+        return invoiceService.editInvoiceById(invoiceId,invoiceDTO);
+    }
+
 }
