@@ -23,8 +23,7 @@ package cz.itnetwork.entity;
 
 import cz.itnetwork.constant.Countries;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,9 +76,9 @@ public class PersonEntity {
 
     private boolean hidden = false;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
-    private List<InvoiceEntity> purchases;
+    @OneToMany( mappedBy = "buyer")
+    private List<InvoiceEntity> purchases = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
-    private List<InvoiceEntity> sales;
+    @OneToMany( mappedBy = "seller")
+    private List<InvoiceEntity> sales = new ArrayList<>();
 }

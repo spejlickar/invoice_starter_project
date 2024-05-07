@@ -41,4 +41,7 @@ public interface PersonService {
     PersonDTO editPersonById(long personId, PersonDTO newPersonDTO);
 
     List<InvoiceDTO> getPurchasesByIdentificationNumber(String identificationNumber);
+
+    List<InvoiceDTO> getSalesByIdentificationNumber(String identificationNumber);
+
 }

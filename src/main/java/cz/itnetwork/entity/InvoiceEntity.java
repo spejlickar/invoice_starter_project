@@ -1,9 +1,7 @@
 package cz.itnetwork.entity;
 
-import cz.itnetwork.constant.Countries;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -19,10 +17,10 @@ public class InvoiceEntity {
     private Long invoiceNumber;
 
     @ManyToOne
-    private PersonEntity seller;
+    private PersonEntity seller = new PersonEntity();
 
     @ManyToOne
-    private PersonEntity buyer;
+    private PersonEntity buyer= new PersonEntity();
 
     @Column(nullable = false)
     private Date issued;
@@ -42,17 +40,4 @@ public class InvoiceEntity {
     @Column(nullable = false)
     private String note;
 
-    public Long getSellerId(){
-        if (this.seller == null) {
-            return null;
-        }
-        return this.seller.getId();
-    }
-
-    public Long getBuyerId(){
-        if (this.seller == null) {
-            return null;
-        }
-        return this.buyer.getId();
-    }
 }

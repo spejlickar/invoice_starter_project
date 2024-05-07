@@ -101,6 +101,15 @@ public class PersonServiceImpl implements PersonService {
                 .toList();
     }
 
+    @Override
+    public List<InvoiceDTO> getSalesByIdentificationNumber(String identificationNumber) {
+        return personRepository.findByIdentificationNumber(identificationNumber)
+                .stream()
+                .flatMap(i ->i.getSales().stream())
+                .map(i->invoiceMapper.toDTO(i))
+                .toList();
+    }
+
     // region: Private methods
     /**
      * <p>Attempts to fetch a person.</p>

@@ -63,10 +63,16 @@ public class PersonController {
         return personService.editPersonById(personId,personDTO);
     }
 
+    @GetMapping("/identification/{identificationNumber}/sales")
+    public List<InvoiceDTO> getInvoicesBySeller(@PathVariable String identificationNumber) {
+        return personService.getSalesByIdentificationNumber(identificationNumber);
+    }
+
     @GetMapping("/identification/{identificationNumber}/purchases")
-    public List<InvoiceDTO> getInvoices(String identificationNumber) {
+    public List<InvoiceDTO> getInvoicesByBuyer(@PathVariable String identificationNumber) {
         return personService.getPurchasesByIdentificationNumber(identificationNumber);
     }
+
 
 }
 
