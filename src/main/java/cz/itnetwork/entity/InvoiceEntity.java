@@ -40,4 +40,17 @@ public class InvoiceEntity {
     @Column(nullable = false)
     private String note;
 
+    public Long getSellerId(){
+        if (this.seller.getId() == null) {
+            return null;
+        }
+        return this.seller.getId();
+    }
+
+    public Long getBuyerId(){
+        if (this.buyer.getId() == null) {
+            return null;
+        }
+        return this.buyer.getId();
+    }
 }
