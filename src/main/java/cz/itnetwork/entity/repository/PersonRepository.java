@@ -21,15 +21,22 @@
  */
 package cz.itnetwork.entity.repository;
 
+import cz.itnetwork.dto.PersonStatisticsDTO;
 import cz.itnetwork.entity.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 
     List<PersonEntity> findByHidden(boolean hidden);
 
     List<PersonEntity> findByIdentificationNumber(String identificationNumber);
+
+    @Query(value = "SELECT NEW cz.itnetwork.dto.PersonStatisticsDTO( p.id,p.name,IFNULL(SUM(i.price),0) )" +
+        " FROM person p LEFT JOIN invoice i ON p.id = seller WHERE p.hidden = 0 GROUP BY p.identificationNumber")
+    List<PersonStatisticsDTO> getPersonStatistics();
 
 }

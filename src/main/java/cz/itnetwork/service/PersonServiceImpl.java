@@ -23,6 +23,7 @@ package cz.itnetwork.service;
 
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
+import cz.itnetwork.dto.PersonStatisticsDTO;
 import cz.itnetwork.dto.mapper.InvoiceMapper;
 import cz.itnetwork.dto.mapper.PersonMapper;
 import cz.itnetwork.entity.PersonEntity;
@@ -108,6 +109,11 @@ public class PersonServiceImpl implements PersonService {
                 .flatMap(i ->i.getSales().stream())
                 .map(i->invoiceMapper.toDTO(i))
                 .toList();
+    }
+
+    @Override
+    public List<PersonStatisticsDTO> getPersonsStatistics() {
+        return personRepository.getPersonStatistics();
     }
 
     // region: Private methods

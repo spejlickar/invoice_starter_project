@@ -2,6 +2,7 @@ package cz.itnetwork.service;
 
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
+import cz.itnetwork.dto.PersonStatisticsDTO;
 
 import java.util.List;
 
@@ -43,5 +44,7 @@ public interface PersonService {
     List<InvoiceDTO> getPurchasesByIdentificationNumber(String identificationNumber);
 
     List<InvoiceDTO> getSalesByIdentificationNumber(String identificationNumber);
+
+    List<PersonStatisticsDTO> getPersonsStatistics();
 
 }
