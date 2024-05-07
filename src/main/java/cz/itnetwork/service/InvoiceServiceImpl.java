@@ -1,6 +1,7 @@
 package cz.itnetwork.service;
 
 import cz.itnetwork.dto.InvoiceDTO;
+import cz.itnetwork.dto.InvoiceStatisticsDTO;
 import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.dto.mapper.InvoiceMapper;
 import cz.itnetwork.dto.mapper.PersonMapper;
@@ -57,5 +58,14 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoiceDTO.setSeller(personService.getPersonById(invoiceDTO.getSeller().getId()));
         invoiceDTO.setBuyer(personService.getPersonById(invoiceDTO.getBuyer().getId()));
         return invoiceDTO;
+    }
+
+    @Override
+    public InvoiceStatisticsDTO getInvoicesStatistics() {
+        InvoiceStatisticsDTO resultStatistic = new InvoiceStatisticsDTO();
+        resultStatistic.setInvoicesCount(invoiceRepository.getInvoicesCount());
+        resultStatistic.setAllTimeSum(invoiceRepository.getAllTimeSum());
+        resultStatistic.setCurrentYearSum(invoiceRepository.getCurrentYearSum());
+        return resultStatistic;
     }
 }
