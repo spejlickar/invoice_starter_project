@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
+import java.util.List;
+
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
 
@@ -46,7 +48,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceDTO getAllInvoiceByFilter(InvoiceFilter invoiceFilter) {
+    public List<InvoiceDTO> getAllInvoiceByFilter(InvoiceFilter invoiceFilter) {
         InvoiceSpecification invoiceSpecification = new InvoiceSpecification(invoiceFilter);
         return invoiceRepository.findAll(invoiceSpecification,PageRequest.of(0,invoiceFilter.getLimit()))
                 .getContent()

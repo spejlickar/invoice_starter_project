@@ -4,6 +4,8 @@ import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.InvoiceFilter;
 import cz.itnetwork.dto.InvoiceStatisticsDTO;
 
+import java.util.List;
+
 
 public interface InvoiceService {
     InvoiceDTO addInvoice(InvoiceDTO invoiceDTO);
@@ -11,5 +13,5 @@ public interface InvoiceService {
     InvoiceDTO editInvoiceById(long invoiceId, InvoiceDTO invoiceDTO);
     void removePerson(long invoiceId);
     InvoiceStatisticsDTO getInvoicesStatistics();
-    InvoiceDTO getAllInvoiceByFilter(InvoiceFilter invoiceFilter);
+    List<InvoiceDTO> getAllInvoiceByFilter(InvoiceFilter invoiceFilter);
 }
