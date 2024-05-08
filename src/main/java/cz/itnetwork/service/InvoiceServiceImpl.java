@@ -1,15 +1,14 @@
 package cz.itnetwork.service;
 
 import cz.itnetwork.dto.InvoiceDTO;
+import cz.itnetwork.dto.InvoiceFilter;
 import cz.itnetwork.dto.InvoiceStatisticsDTO;
-import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.dto.mapper.InvoiceMapper;
-import cz.itnetwork.dto.mapper.PersonMapper;
 import cz.itnetwork.entity.InvoiceEntity;
-import cz.itnetwork.entity.PersonEntity;
 import cz.itnetwork.entity.repository.InvoiceRepository;
-import cz.itnetwork.entity.repository.PersonRepository;
+import cz.itnetwork.entity.repository.InvoiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -46,7 +45,17 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoiceRepository.delete(fetchInvoiceById(invoiceId));
     }
 
-//    /////////////private methods//////////////////////////////////////////////////////////////////////////
+    @Override
+    public InvoiceDTO getAllInvoiceByFilter(InvoiceFilter invoiceFilter) {
+        InvoiceSpecification invoiceSpecification = new InvoiceSpecification(invoiceFilter);
+        return invoiceRepository.findAll(invoiceSpecification,PageRequest.of(0,invoiceFilter.getLimit()))
+                .getContent()
+                .stream()
+                .map(i->invoiceMapper.toDTO(i))
+                .toList();
+    }
+
+    //    /////////////private methods//////////////////////////////////////////////////////////////////////////
 
     private InvoiceEntity fetchInvoiceById(long id) {
         return invoiceRepository.findById(id)

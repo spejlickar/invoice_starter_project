@@ -1,6 +1,7 @@
 package cz.itnetwork.controller;
 
 import cz.itnetwork.dto.InvoiceDTO;
+import cz.itnetwork.dto.InvoiceFilter;
 import cz.itnetwork.dto.InvoiceStatisticsDTO;
 import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.service.InvoiceService;
@@ -18,6 +19,10 @@ public class InvoiceController {
     @PostMapping("/invoices")
     public InvoiceDTO addInvoice(@RequestBody InvoiceDTO invoiceDTO) {
         return invoiceService.addInvoice(invoiceDTO);
+    }
+    @GetMapping("/invoices")
+    public InvoiceDTO getAllInvoice(InvoiceFilter invoiceFilter) {
+        return invoiceService.getAllInvoiceByFilter(invoiceFilter);
     }
 
     @GetMapping("/invoices/{invoiceId}")
