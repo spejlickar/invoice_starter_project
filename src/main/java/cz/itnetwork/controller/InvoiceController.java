@@ -40,7 +40,7 @@ public class InvoiceController {
     @DeleteMapping("/invoices/{invoiceId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteInvoice(@PathVariable Long invoiceId) {
-        invoiceService.removePerson(invoiceId);
+        invoiceService.removeInvoice(invoiceId);
     }
 
     @GetMapping("/invoices/statistics")

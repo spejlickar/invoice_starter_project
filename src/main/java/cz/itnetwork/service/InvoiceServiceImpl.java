@@ -33,7 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceDTO getInvoiceById(long invoiceId) {
-        return completeInvoice(fetchInvoiceById(invoiceId));
+        return invoiceMapper.toDTO( fetchInvoiceById(invoiceId));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public void removePerson(long invoiceId) {
+    public void removeInvoice(long invoiceId) {
         invoiceRepository.delete(fetchInvoiceById(invoiceId));
     }
 

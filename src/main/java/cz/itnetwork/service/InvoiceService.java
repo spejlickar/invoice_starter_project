@@ -11,7 +11,7 @@ public interface InvoiceService {
     InvoiceDTO addInvoice(InvoiceDTO invoiceDTO);
     InvoiceDTO getInvoiceById(long invoiceId);
     InvoiceDTO editInvoiceById(long invoiceId, InvoiceDTO invoiceDTO);
-    void removePerson(long invoiceId);
+    void removeInvoice(long invoiceId);
     InvoiceStatisticsDTO getInvoicesStatistics();
     List<InvoiceDTO> getAllInvoiceByFilter(InvoiceFilter invoiceFilter);
 }
