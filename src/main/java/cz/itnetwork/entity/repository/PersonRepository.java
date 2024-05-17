@@ -30,11 +30,24 @@ import java.util.List;
 import java.util.Map;
 
 public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
-
+    /**
+     * Najde fakturu dle jestli jsou skrite(hidden)
+     * @param hidden jsou/nejso skrite
+     * @return seznam vsech faktur dle skriti
+     */
     List<PersonEntity> findByHidden(boolean hidden);
 
+    /**
+     * vrati seznam lidi dle identifikacniho cisla (identificationNumber)
+     * @param identificationNumber identifikacni cislo osoby
+     * @return seznam lidi del identifikacniho cisla
+     */
     List<PersonEntity> findByIdentificationNumber(String identificationNumber);
 
+    /**
+     * vypis statistik
+     * @return vypiše statisku osob a jejich vyfakturované ceny
+     */
     @Query(value = "SELECT NEW cz.itnetwork.dto.PersonStatisticsDTO( p.id,p.name,IFNULL(SUM(i.price),0) )" +
         " FROM person p LEFT JOIN invoice i ON p.id = seller WHERE p.hidden = 0 GROUP BY p.identificationNumber")
     List<PersonStatisticsDTO> getPersonStatistics();

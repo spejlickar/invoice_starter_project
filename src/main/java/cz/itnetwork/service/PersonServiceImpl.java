@@ -74,12 +74,6 @@ public class PersonServiceImpl implements PersonService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * vrati DTO person, pokud neexistuje, tak vznikne vyjímka NotFoundException, ktera vratí klientovi chybu 404
-     * @param personId hledane id
-     * @return najite DTO person
-     */
-
     @Override
     public PersonDTO getPersonById(long personId) {
         return personMapper.toDTO(fetchPersonById(personId));

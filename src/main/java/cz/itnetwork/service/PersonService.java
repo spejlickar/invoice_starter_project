@@ -32,30 +32,37 @@ public interface PersonService {
     List<PersonDTO> getAll();
 
     /**
-     * varti DTO person
-     * @param personId hledane Id
+     * vrati DTO person dle id, v pripade neexisstujici osoby, se vyvola vyjimka
+     * @param personId hledane Id osoby
      * @return person DTO
      */
-
     PersonDTO getPersonById(long personId);
 
     /**
-     * upravi osobu dle id osoby
-     * @param personId id osoby
+     * upravi osobu dle id osoby a dat z DTO
+     * @param personId upravovana id osoba
      * @param newPersonDTO DTO nove osoby
      * @return nove DTO vcetne id
      */
     PersonDTO editPersonById(long personId, PersonDTO newPersonDTO);
 
     /**
-     * vyhleda faktury dle
-     * @param identificationNumber
-     * @return
+     * vyhledá přijaté faktury dle identifikačního čísla
+     * @param identificationNumber identifikační číslo
+     * @return seznam přijatých faktur
      */
     List<InvoiceDTO> getPurchasesByIdentificationNumber(String identificationNumber);
-
+    /**
+     * vyhledá vydané faktury dle identifikačního čísla
+     * @param identificationNumber identifikační číslo
+     * @return seznam vydaných faktur
+     */
     List<InvoiceDTO> getSalesByIdentificationNumber(String identificationNumber);
 
+    /**
+     * vypis statistik
+     * @return vypiše statisku osob a jejich vyfakturované ceny
+     */
     List<PersonStatisticsDTO> getPersonsStatistics();
 
 }

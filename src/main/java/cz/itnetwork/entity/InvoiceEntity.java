@@ -40,6 +40,10 @@ public class InvoiceEntity {
     @Column(nullable = false)
     private String note;
 
+    /**
+     * vrati id prodejce
+     * @return id prodejce
+     */
     public Long getSellerId(){
         if (this.seller.getId() == null) {
             return null;
@@ -47,6 +51,10 @@ public class InvoiceEntity {
         return this.seller.getId();
     }
 
+    /**
+     * vrati id kupujiciho
+     * @return id kupujiciho
+     */
     public Long getBuyerId(){
         if (this.buyer.getId() == null) {
             return null;

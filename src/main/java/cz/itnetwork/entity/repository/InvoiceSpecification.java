@@ -19,6 +19,13 @@ public class InvoiceSpecification implements Specification<InvoiceEntity> {
         this.invoiceFilter = invoiceFilter;
     }
 
+    /**
+     * statistika
+     * @param root root
+     * @param query query
+     * @param criteriaBuilder criteriaBuilder
+     * @return predicate
+     */
     @Override
     public Predicate toPredicate(Root<InvoiceEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
