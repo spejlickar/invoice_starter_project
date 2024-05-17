@@ -11,8 +11,6 @@ public interface InvoiceMapper {
     InvoiceEntity toEntity(InvoiceDTO source);
     InvoiceDTO toDTO(InvoiceEntity source);
 
-//    @Mapping(target = "seller",ignore = true)
-//    @Mapping(target = "buyer",ignore = true)
     @Mapping(target = "id",ignore = true)
     InvoiceEntity updateEntity(InvoiceDTO source, @MappingTarget InvoiceEntity target);
 }

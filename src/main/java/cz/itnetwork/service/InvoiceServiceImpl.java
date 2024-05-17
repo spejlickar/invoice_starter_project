@@ -40,8 +40,6 @@ public class InvoiceServiceImpl implements InvoiceService {
     public InvoiceDTO editInvoiceById(long invoiceId, InvoiceDTO invoiceDTO) {
         InvoiceEntity editInvoiceEntity = fetchInvoiceById(invoiceId);
         return completeInvoice(invoiceRepository.save(invoiceMapper.updateEntity(invoiceDTO,editInvoiceEntity)));
-//        invoiceDTO.setId(invoiceId);
-//        return completeInvoice(invoiceRepository.save(invoiceMapper.toEntity(invoiceDTO)));
     }
 
     @Override

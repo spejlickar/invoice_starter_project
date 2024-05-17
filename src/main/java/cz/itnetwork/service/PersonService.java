@@ -39,8 +39,19 @@ public interface PersonService {
 
     PersonDTO getPersonById(long personId);
 
+    /**
+     * upravi osobu dle id osoby
+     * @param personId id osoby
+     * @param newPersonDTO DTO nove osoby
+     * @return nove DTO vcetne id
+     */
     PersonDTO editPersonById(long personId, PersonDTO newPersonDTO);
 
+    /**
+     * vyhleda faktury dle
+     * @param identificationNumber
+     * @return
+     */
     List<InvoiceDTO> getPurchasesByIdentificationNumber(String identificationNumber);
 
     List<InvoiceDTO> getSalesByIdentificationNumber(String identificationNumber);
