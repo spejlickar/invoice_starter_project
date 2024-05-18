@@ -31,11 +31,11 @@ public class InvoiceSpecification implements Specification<InvoiceEntity> {
         List<Predicate> predicates = new ArrayList<>();
         if (invoiceFilter.getBuyerID() != null) {
             Join<PersonEntity,InvoiceEntity> buyerJoin = root.join(InvoiceEntity_.BUYER);
-            predicates.add(criteriaBuilder.equal(buyerJoin.get(PersonEntity_.ID),invoiceFilter.getBuyerID()));
+            predicates.add(criteriaBuilder.equal(buyerJoin.get(PersonEntity_.IDENTIFICATION_NUMBER),invoiceFilter.getBuyerID()));
         }
         if (invoiceFilter.getSellerID() != null) {
             Join<PersonEntity,InvoiceEntity> buyerJoin = root.join(InvoiceEntity_.SELLER);
-            predicates.add(criteriaBuilder.equal(buyerJoin.get(PersonEntity_.ID),invoiceFilter.getSellerID()));
+            predicates.add(criteriaBuilder.equal(buyerJoin.get(PersonEntity_.IDENTIFICATION_NUMBER),invoiceFilter.getSellerID()));
         }
         if(invoiceFilter.getProduct() != null) {
             predicates.add(criteriaBuilder.like(criteriaBuilder.trim(root.get(InvoiceEntity_.PRODUCT)), "%"+invoiceFilter.getProduct().toLowerCase().trim()+"%"));

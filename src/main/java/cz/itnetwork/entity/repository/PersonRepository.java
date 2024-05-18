@@ -49,7 +49,10 @@ public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
      * @return vypiše statisku osob a jejich vyfakturované ceny
      */
     @Query(value = "SELECT NEW cz.itnetwork.dto.PersonStatisticsDTO( p.id,p.name,IFNULL(SUM(i.price),0) )" +
-        " FROM person p LEFT JOIN invoice i ON p.id = seller WHERE p.hidden = 0 GROUP BY p.identificationNumber")
+        " FROM person p LEFT JOIN invoice i ON p.id = seller GROUP BY p.id")
     List<PersonStatisticsDTO> getPersonStatistics();
+
+    //@Query(value = "SELECT * FROM person GROUP BY identification_number", nativeQuery = true)
+    //List<PersonEntity> getAllPersonGroupByIdentificationNumber();
 
 }

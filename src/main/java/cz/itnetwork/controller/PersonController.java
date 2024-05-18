@@ -21,10 +21,7 @@
  */
 package cz.itnetwork.controller;
 
-import cz.itnetwork.dto.InvoiceDTO;
-import cz.itnetwork.dto.InvoiceStatisticsDTO;
-import cz.itnetwork.dto.PersonDTO;
-import cz.itnetwork.dto.PersonStatisticsDTO;
+import cz.itnetwork.dto.*;
 import cz.itnetwork.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,6 +44,11 @@ public class PersonController {
     @GetMapping("/persons")
     public List<PersonDTO> getPersons() {
         return personService.getAll();
+    }
+
+    @GetMapping("/persons/all")
+    public List<IcDTO> getPersonsAll() {
+        return personService.getAllIc();
     }
 
     @DeleteMapping("/persons/{personId}")

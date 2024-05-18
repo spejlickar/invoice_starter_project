@@ -32,10 +32,10 @@ public class InvoiceEntity {
     private String product;
 
     @Column(nullable = false)
-    private int price;
+    private Integer price;
 
     @Column(nullable = false)
-    private int vat;
+    private Integer vat;
 
     @Column(nullable = false)
     private String note;

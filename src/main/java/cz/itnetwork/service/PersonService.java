@@ -1,5 +1,6 @@
 package cz.itnetwork.service;
 
+import cz.itnetwork.dto.IcDTO;
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.dto.PersonStatisticsDTO;
@@ -30,6 +31,13 @@ public interface PersonService {
      * @return List of all non-hidden persons
      */
     List<PersonDTO> getAll();
+
+    /**
+     * vrati IČ unikatni seznam všech osob i skritých
+     * @return IČ unikatni seznam všech osob i skritých
+     */
+
+    List<IcDTO> getAllIc();
 
     /**
      * vrati DTO person dle id, v pripade neexisstujici osoby, se vyvola vyjimka

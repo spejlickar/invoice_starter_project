@@ -21,6 +21,7 @@
  */
 package cz.itnetwork.service;
 
+import cz.itnetwork.dto.IcDTO;
 import cz.itnetwork.dto.InvoiceDTO;
 import cz.itnetwork.dto.PersonDTO;
 import cz.itnetwork.dto.PersonStatisticsDTO;
@@ -75,6 +76,15 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public List<IcDTO> getAllIc() {
+        return personRepository.findAll()
+                .stream()
+                .map(i->i.getIdentificationNumber()).distinct()
+                .map(i->new IcDTO(i,"IČ: "+i))
+                .toList();
+    }
+
+    @Override
     public PersonDTO getPersonById(long personId) {
         return personMapper.toDTO(fetchPersonById(personId));
     }
@@ -84,6 +94,7 @@ public class PersonServiceImpl implements PersonService {
         PersonEntity savedPersonEntity = fetchPersonById(personId);
         savedPersonEntity.setHidden(true);
         personRepository.save(savedPersonEntity);
+        newPersonDTO.setId(null);
         return personMapper.toDTO(personRepository.save(personMapper.toEntity(newPersonDTO)));
     }
 
@@ -91,6 +102,7 @@ public class PersonServiceImpl implements PersonService {
     public List<InvoiceDTO> getPurchasesByIdentificationNumber(String identificationNumber) {
         return personRepository.findByIdentificationNumber(identificationNumber)
                 .stream()
+                .filter(i->!i.isHidden())
                 .flatMap(i ->i.getPurchases().stream())
                 .map(i->invoiceMapper.toDTO(i))
                 .toList();
@@ -100,6 +112,7 @@ public class PersonServiceImpl implements PersonService {
     public List<InvoiceDTO> getSalesByIdentificationNumber(String identificationNumber) {
         return personRepository.findByIdentificationNumber(identificationNumber)
                 .stream()
+                .filter(i->!i.isHidden())
                 .flatMap(i ->i.getSales().stream())
                 .map(i->invoiceMapper.toDTO(i))
                 .toList();

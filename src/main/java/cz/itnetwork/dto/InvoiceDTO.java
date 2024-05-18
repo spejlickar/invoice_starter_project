@@ -15,7 +15,7 @@ public class InvoiceDTO {
     @JsonProperty("_id")
     private Long id;
 
-    private long invoiceNumber;
+    private Long invoiceNumber;
 
     private PersonDTO seller;
 
@@ -27,9 +27,9 @@ public class InvoiceDTO {
 
     private String product;
 
-    private int price;
+    private Integer price;
 
-    private int vat;
+    private Integer vat;
 
     private String note;
 }
