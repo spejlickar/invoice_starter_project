@@ -22,10 +22,10 @@ public interface InvoiceMapper {
     InvoiceDTO toDTO(InvoiceEntity source);
 
     /**
-     * do Entity (target) nakopiruje
-     * @param source
-     * @param target
-     * @return
+     * do Entity (target) nakopiruje DTO (source) bez id
+     * @param source data v DTO
+     * @param target entita
+     * @return entita
      */
 
     @Mapping(target = "id",ignore = true)
